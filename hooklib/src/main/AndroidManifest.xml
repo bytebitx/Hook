@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.bbggo.hooklib">
+
+    <application>
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <!-- This entry makes WorkManagerInitializer discoverable. -->
+            <!-- 如果A依赖了B,则只需要在此处注册A即可。value值必须为"androidx.startup",否则不生效 -->
+            <meta-data
+                android:name="com.bbggo.hooklib.startup.HookInitializer"
+                android:value="androidx.startup" />
+        </provider>
+        <activity android:name=".ProxyActivity"/>
+    </application>
+
+</manifest>
