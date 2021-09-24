@@ -9,5 +9,3 @@ dependencyResolutionManagement {
 rootProject.name = "HookProject"
 include ':app'
 include ':hooklib'
-include ':hook-compiler'
-include ':hook-annotation'

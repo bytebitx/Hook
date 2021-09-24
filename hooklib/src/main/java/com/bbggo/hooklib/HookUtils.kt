@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.Message
+import com.bbggo.hooklib.proxy.ProxyActivity
 import java.lang.reflect.Field
 import java.lang.reflect.Proxy
 
@@ -77,7 +78,7 @@ class HookUtils {
                         }
                         val originIntent = args[pos] as Intent
                         val proxyIntent = Intent(originIntent)
-                        getProxyActivityClz()?.let { proxyIntent.setClass(context, it) }
+                        proxyIntent.setClass(context, ProxyActivity::class.java)
                         proxyIntent.putExtra(INTENT_KEY, originIntent)
                         args[pos] = proxyIntent
                     }
@@ -111,20 +112,6 @@ class HookUtils {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }
-
-        private fun getProxyActivityClz(): Class<*>? {
-            try {
-                val hookUtilsClz = Class.forName("com.bbggo.hook.HookUtils")
-                val getHookActivityMethod =
-                    hookUtilsClz.getDeclaredMethod("getHookActivity")
-                getHookActivityMethod.isAccessible = true
-                val hookActivity = getHookActivityMethod.invoke(null) as String
-                return Class.forName(hookActivity)
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
-            return null
         }
     }
 

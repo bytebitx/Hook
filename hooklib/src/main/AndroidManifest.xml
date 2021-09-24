@@ -15,7 +15,7 @@
                 android:name="com.bbggo.hooklib.startup.HookInitializer"
                 android:value="androidx.startup" />
         </provider>
-        <activity android:name=".ProxyActivity"/>
+        <activity android:name=".proxy.ProxyActivity"/>
     </application>
 
 </manifest>
